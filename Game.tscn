@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/HUD.gd" type="Script" id=1]
+[ext_resource path="res://UI/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/space 2.jpg" type="Texture" id=3]
+[ext_resource path="res://Asteroid/Asteroid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player_Container.gd" type="Script" id=6]
+
+[node name="Game" type="Node2D"]
+__meta__ = {
+"_editor_description_": "The root of the scene"
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 511, 314 )
+texture = ExtResource( 3 )
+
+[node name="Player_Container" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="Asteroid_Container" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 183, 97 )
+
+[node name="Asteroid2" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 841, 498 )
+
+[node name="Asteroid3" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 903, 107 )
+
+[node name="Asteroid4" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 306, 332 )
+
+[node name="Asteroid5" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 705, 263 )
+
+[node name="Asteroid6" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 100, 516 )
+
+[node name="Asteroid7" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 575, 89 )
+
+[node name="Asteroid8" parent="Asteroid_Container" instance=ExtResource( 4 )]
+position = Vector2( 524, 565 )
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+pause_mode = 2
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="UI/HUD"]
+margin_right = 1024.0
+margin_bottom = 30.0
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="UI/HUD"]
+margin_right = 1024.0
+margin_bottom = 30.0
+align = 2
+valign = 1
+
+[node name="Lives" type="Label" parent="UI/HUD"]
+margin_top = 570.0
+margin_right = 1024.0
+margin_bottom = 600.0
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="UI/HUD"]
+autostart = true
+
+[node name="Menu" type="Control" parent="UI"]
+pause_mode = 2
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/Menu"]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.25098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Menu"]
+margin_right = 1024.0
+margin_bottom = 400.0
+text = "Game Paused"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Button" parent="UI/Menu"]
+margin_left = 463.0
+margin_top = 350.0
+margin_right = 563.0
+margin_bottom = 390.0
+text = "Reset Hell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="UI/Menu"]
+margin_left = 463.0
+margin_top = 400.0
+margin_right = 563.0
+margin_bottom = 440.0
+text = "Escape Hell"
+
+[connection signal="timeout" from="UI/HUD/Timer" to="UI/HUD" method="_on_Timer_timeout"]
+[connection signal="pressed" from="UI/Menu/Reset" to="UI/Menu" method="_on_Reset_pressed"]
+[connection signal="pressed" from="UI/Menu/Quit" to="UI/Menu" method="_on_Quit_pressed"]
